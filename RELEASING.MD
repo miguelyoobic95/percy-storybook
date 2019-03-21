@@ -8,3 +8,10 @@
 1. Announce the new release,
    making sure to say "thank you" to the contributors
    who helped shape this version!
+
+# Beta Releases
+
+1. `git pull origin master`
+1. `yarn test`
+1. `lerna publish <premajor | preminor | prepatch | prerelease> --preid beta --dist-tag beta` - This will publish a beta version to npm.
+1. [Visit npm](https://www.npmjs.com/package/@percy-io/percy-storybook) and verify that the new beta version is live
