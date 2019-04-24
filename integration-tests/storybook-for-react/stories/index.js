@@ -1,9 +1,11 @@
 import React from 'react';
+import styled from 'styled-components';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, number } from '@storybook/addon-knobs';
 import { Button } from '@storybook/react/demo';
+import { withThemesProvider } from 'storybook-addon-styled-component-theme';
 import faker from 'faker';
 
 // Disabling the two lines below until react-match-media that works with react 16 is released
@@ -186,3 +188,22 @@ storiesOf('Story with knobs', module)
     const numKnobs = number('Knobs', 5);
     return <span>This story has {numKnobs} knobs to test the knobs addon</span>;
   });
+
+const StyledDiv = styled.div`
+  width: 200px;
+  line-height: 200px;
+  text-align: center;
+  background-color: ${props => props.theme.backgroundColor};
+  color: ${props => props.theme.textColor};
+  border: 1px solid dimgrey;
+  border-radius: ${props => props.theme.borderRadius};
+`;
+
+const themes = [
+  { name: 'first', borderRadius: '10px', textColor: 'blue', backgroundColor: 'orange' },
+  { name: 'second', borderRadius: '1px', textColor: 'red', backgroundColor: 'green' },
+];
+
+storiesOf('Story with styled theme', module)
+  .addDecorator(withThemesProvider(themes))
+  .add('demo div', () => <StyledDiv>DEMO</StyledDiv>);
