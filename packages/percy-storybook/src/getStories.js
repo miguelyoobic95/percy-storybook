@@ -14,8 +14,14 @@ const fetchStoriesFromWindow = `(async () => {
     // Usually stories will be found on the first loop.
     var checkStories = function(timesCalled) {
       if (window[storiesKey]) {
-        // Found the stories, return them.
-        resolve(window[storiesKey]);
+        // Found the stories, sanitize to name, kind, and options, and then return them.
+        var reducedStories = window[storiesKey].map(story => ({
+          kind: story.kind,
+          stories: story.stories,
+          fileName: story.fileName
+        }));
+
+        resolve(reducedStories);
       } else if (timesCalled < 100) {
         // Stories not found yet, try again 100ms from now
         setTimeout(() => {

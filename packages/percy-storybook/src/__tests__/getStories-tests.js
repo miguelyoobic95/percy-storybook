@@ -26,5 +26,5 @@ it('raises an error when no stories loaded', async () => {
 
 it('returns the value window[storiesKey] is set to', async () => {
   const stories = await getStories({ iframePath: __dirname + '/iframe.html' });
-  expect(stories).toEqual('mock window __storybook_stories__ value');
+  expect(stories).toEqual([{"kind": "Button", "parameters": {}}]);
 });
